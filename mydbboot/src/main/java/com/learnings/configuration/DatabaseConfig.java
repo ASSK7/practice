@@ -10,6 +10,8 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.cloud.config.java.AbstractCloudConfig;
 import org.springframework.cloud.service.relational.DataSourceConfig;
@@ -25,6 +27,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 //@Profile({"local", "cf-test", "cf-dev","cf-prod"})
 @Configuration
+
 //@Profile("cloud")
 public class DatabaseConfig extends AbstractCloudConfig {
 	
