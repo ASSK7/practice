@@ -24,7 +24,7 @@ sap.ui.define([
 		onPress : function(){
 			//alert("todo : we will call a microservice to load data");
 			var that=this;
-			service.callService("/newVendor","GET",{}).then(function(data){
+			service.callService("/vendors","GET",{}).then(function(data){
 				//console.log(data);
 					var oTable=that.getView().byId("idTable");
 					var oModel = that.getView().getModel();
