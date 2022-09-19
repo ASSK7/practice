@@ -1,0 +1,105 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+ xmlns="sap.m" controllerName="afreed.controller.Main">
+   <Page title="Welcome to UI5 app">
+   <Button text="Click Me!" press="onPress"></Button>
+   
+   	<f:SimpleForm id="SimpleFormDisplay354"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="Vendor Details"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="true"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+			    <Label text="ID" />
+				<Input id="vendId" value="{/postPayload/id}" />
+				<Label text="companyName" />
+				<Input id="name" value="{/postPayload/companyName}" />
+				<Label text="First Name / Last Name" />
+				<Input value="{/postPayload/firstName}">
+				</Input>
+				<Input value="{/postPayload/lastName}">
+					<layoutData>
+						<l:GridData span="XL1 L2 M2 S4" />
+					</layoutData>
+				</Input>
+				<Label text="Email" />
+				<Input value="{/postPayload/email}" />
+				<Label text="Website" />
+				<Input value="{/postPayload/website}" />
+				<Label text="GSTNumber" />
+				<Input value="{/postPayload/gstNumber}" />
+			</f:content>
+		</f:SimpleForm>
+   
+   <Table id="idTable" items="{/vendor}">
+      <columns>
+      <Column>
+       <Label text="Company Name" design="Bold"></Label>
+      </Column>
+      
+      <Column>
+       <Label text="First Name" design="Bold"></Label>
+      </Column>
+      
+      <Column>
+       <Label text="Last Name" design="Bold"></Label>
+      </Column>
+      
+      <Column>
+       <Label text="Email" design="Bold"></Label>
+      </Column>
+      
+      <Column>
+       <Label text="Website" design="Bold"></Label>
+      </Column>
+      
+      <Column>
+       <Label text="Status" design="Bold"></Label>
+      </Column>
+      
+      <Column>
+       <Label text="GstNumber" design="Bold"></Label>
+      </Column>
+      </columns>
+      
+      <items>
+      <ColumnListItem>
+      <cells>
+         <Text text="{companyName}"></Text>
+         <Text text="{firstName}"></Text>
+         <Text text="{lastName}"></Text>
+         <Text text="{email}"></Text>
+         <Text text="{website}"></Text>
+         <Text text="{vstatus}"></Text>
+         <Text text="{gstNumber}"></Text>
+      </cells>
+      </ColumnListItem>
+      </items>
+      
+      
+   </Table>
+   
+   <footer>
+   <Toolbar>
+   <ToolbarSpacer/>
+    <Button type="Emphasized" text="Save" press="onSave"/>
+    
+   </Toolbar>
+   </footer>
+   
+   </Page>
+   
+</mvc:View>

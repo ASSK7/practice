@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.learnings.entities.vendor;
 import com.sap.db.jdbcext.wrapper.Connection;
+import com.sap.db.jdbcext.wrapper.PreparedStatement;
 import com.sap.db.jdbcext.wrapper.ResultSet;
 import com.sap.db.jdbcext.wrapper.Statement;
 
@@ -69,7 +70,7 @@ public class vendorOperationS {
 	    }
 	}
 	
-	
+	// Method to get all data
 	public List<vendor> getAllVendors(){
 		List<vendor> vendorList = new ArrayList<vendor>();
 		
@@ -87,7 +88,7 @@ public class vendorOperationS {
 						rs.getString("ID"),
 						rs.getString("FIRSTNAME"),
 						rs.getString("LASTNAME"),
-						rs.getString("COMPANY"),
+						rs.getString("COMPANYNAME"),
 						rs.getString("WEBSITE"),
 						rs.getString("EMAIL"),
 						rs.getString("VSTATUS"),
@@ -102,6 +103,47 @@ public class vendorOperationS {
 		
 		return vendorList;
 	}
+	
+	//Method for reading single record
+	public vendor getSingleVendor(String id) throws SQLException {
+		
+		vendor vendorObj = new vendor();
+		rs = stmt.executeQuery("SELECT * from VENDOR where id = " + id);
+		
+		while(rs.next()) {
+			vendorObj.setId(rs.getString("ID"));
+			vendorObj.setEmail("EMAIL");
+			vendorObj.setCompanyName("COMPANYNAME");
+			vendorObj.setFirstName("FIRSTNAME");
+			vendorObj.setLastName("LASTNAME");
+			vendorObj.setGstNumber("GSTNUMBER");
+			vendorObj.setWebsite("WEBSITE");
+			vendorObj.setVstatus("VSTATUS");
+		}
+		
+		return vendorObj;
+	}
+	
+	//Method for creating a record
+	public vendor createVendor(vendor payload) throws SQLException {
+		String lv_query = "INSERT INTO VENDOR (id, firstname, lastname, companyname, email, website, vstatus, gstnumber) VALUES('" + payload.getId() + "','" + payload.getFirstName() + "','" + payload.getLastName() + "','" + payload.getCompanyName() + "','" + payload.getEmail() + "','" + payload.getWebsite() + "','" + payload.getVstatus() + "','" + payload.getGstNumber() + "')";
+		int row = stmt.executeUpdate(lv_query);
+//		String lv_query="INSERT INTO VENDOR VALUES(?,?,?,?,?,?,'A',?)";
+//	  PreparedStatement prpstmt =	(PreparedStatement) conn.prepareStatement(lv_query);
+//	  
+//	  prpstmt.setString(1, payload.getId());
+//	  prpstmt.setString(2, payload.getFirstName());
+//	  prpstmt.setString(3, payload.getLastName());
+//	  prpstmt.setString(4, payload.getCompanyName());
+//	  prpstmt.setString(5, payload.getWebsite());
+//	  prpstmt.setString(6, payload.getEmail());
+//	  prpstmt.setString(7, payload.getGstNumber());
+//	  
+//	  int row = prpstmt.executeUpdate();
+	  return payload;
+	}
+	
+	
 	
 	@PreDestroy
 	public void endConnection() throws SQLException {
